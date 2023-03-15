@@ -5,6 +5,18 @@ import plotly.graph_objects as go
 from streamlit_folium import folium_static
 import folium
 
+CSS = """
+h2 {
+    color: deeppink;
+}
+
+.css-6qob1r {
+    background: #f5cee5 !important;
+}
+"""
+
+st.write(f'<style>{CSS}</style>', unsafe_allow_html=True)
+
 px.set_mapbox_access_token(
     'pk.eyJ1Ijoiam1oYmF1ZGluNzUiLCJhIjoiY2xkYWY0aTh4MGYzaTN2bnB6NTVqcXlqeCJ9.k7_gsD6_d6aeh9EhU_0Nvw'
 )

@@ -2,12 +2,29 @@ import streamlit as st
 from PIL import Image
 
 
+CSS = """
+h2 {
+    color: deeppink;
+}
+
+.css-6qob1r {
+    background: #f5cee5 !important;
+}
+"""
+
+st.markdown(f'<style>{CSS}</style>', unsafe_allow_html=True)
+
+
 st.header('TFL Bike analysis project')
 
 image = Image.open("tfl-logo.png")
 
 st.image(image, caption='TFL logo')
 
+col1, col2, col3 = st.columns(3)
+col1.metric("MOST USED BIKE", "$437.8", "-$1.25")
+col2.metric("LONGEST RIDE KM", "$121.10", "0.46%")
+col3.metric("BIKES IN THE SYSTEM", "$46,583.91", "+4.87%")
 
 
 

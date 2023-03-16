@@ -89,7 +89,7 @@ station_use = px.scatter_mapbox(
     size=df_station_use['scaled_trip_total'],
     color="All_trips_starting_ending_here",
     color_continuous_scale=px.colors.sequential.Burg,
-    size_max=15,
+    size_max=25,
     zoom=11)
 
 station_use.update_layout(
@@ -105,6 +105,23 @@ station_use.update_layout(
         countrycolor='rgb(204, 204, 204)',
     ),
 )
+
+# "carto-darkmatter",
+# "carto-positron",
+# "open-street-map",
+# "stamen-terrain",
+# "stamen-toner",
+# "stamen-watercolor",
+# "white-bg",
+# "basic",
+# "streets",
+# "outdoors",
+"light",
+"dark",
+# "satellite",
+# "satellite-streets"
+
+station_use.update_mapboxes(style="light")
 
 st.header('Most used stations')
 st.plotly_chart(station_use)

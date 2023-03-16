@@ -55,17 +55,17 @@ def get_evolution_docking_stations():
 
 last_df = get_evolution_docking_stations()
 
-colors = [
-    'plum', 'mediumpurple', 'palevioletred', 'pink', 'cornflowerblue',
-    'hotpink', 'darkmagenta', 'deeppink', 'mediumvioletred', 'rebeccapurple',
-    'royalblue', 'purple'
-]
+# colors = [
+#     'plum', 'mediumpurple', 'palevioletred', 'pink', 'cornflowerblue',
+#     'hotpink', 'darkmagenta', 'green', 'mediumvioletred', 'rebeccapurple',
+#     'royalblue', 'purple'
+# ]
+
+# color_discrete_map = dict(zip(years, colors))
 
 years = list(last_df.year_added.unique())
 
 center = {'lat': 51.509865, 'lon': -0.118092}
-
-color_discrete_map = dict(zip(years, colors))
 
 fig = px.scatter_mapbox(
     data_frame=last_df,
@@ -75,29 +75,16 @@ fig = px.scatter_mapbox(
     animation_frame="exist_in_year",
     # title="Evolution Of Docking stations in London",
     color='year_added',
-    color_discrete_map=color_discrete_map,
+    # color_discrete_map=color_discrete_map,
+    color_continuous_scale=px.colors.sequential.Burg,
     center=center,
     zoom=11,
+    size_max=20,
     width=1000,
-    height=800
-    )
+    height=800)
 
-df_flight_paths = []
-for i in range(len(df_flight_paths)):
-    fig.add_trace(
-        go.Scattergeo(
-            locationmode='USA-states',
-            lon=[
-                df_flight_paths['start_lon'][i], df_flight_paths['end_lon'][i]
-            ],
-            lat=[
-                df_flight_paths['start_lat'][i], df_flight_paths['end_lat'][i]
-            ],
-            mode='lines',
-            line=dict(width=1, color='plum'),
-            opacity=float(df_flight_paths['cnt'][i]) /
-            float(df_flight_paths['cnt'].max()),
-        ))
+
+fig.update_mapboxes(style="light")
 
 st.header('Evolution Of Docking stations in London')
 st.plotly_chart(fig)

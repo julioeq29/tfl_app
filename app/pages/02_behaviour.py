@@ -169,6 +169,7 @@ for i in range(len(df_trips_zones)):
                          name=df_trips_zones['name'][i],
                          hovertext=df_trips_zones['name'][i]))
 
+zones.update_mapboxes(style="light")
 
 st.header('London connections')
 

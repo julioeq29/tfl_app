@@ -135,7 +135,7 @@ def get_tree_map():
 df_tree_map = get_tree_map()
 
 tree_map = px.treemap(data_frame=df_tree_map,
-                      path=[px.Constant("London"), df_tree_map['Unnamed: 0']],
+                      path=[px.Constant("London"), df_tree_map['boroughs']],
                       values="Popular_Trips",
                       color='Popular_Trips',
                       color_continuous_scale=['lightblue', 'pink'])

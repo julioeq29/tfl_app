@@ -1,13 +1,13 @@
-,Popular_Trips
-Camden,8789555
-City of London,6724995
-Hackney,4331065
-Hammersmith,6430106
-Islington,4511806
-Kensigton,11690694
-Lambeth,7836589
-Newham,1233251
-Southwark,7131107
-Tower Hills,13416371
-Wandsworth,6147283
-Westminster,26227724
+,boroughs,Popular_Trips
+0,Camden,8789555
+1,City of London,6724995
+2,Hackney,4331065
+3,Hammersmith,6430106
+4,Islington,4511806
+5,Kensigton,11690694
+6,Lambeth,7836589
+7,Newham,1233251
+8,Southwark,7131107
+9,Tower Hills,13416371
+10,Wandsworth,6147283
+11,Westminster,26227724

@@ -3,28 +3,46 @@ from PIL import Image
 
 
 CSS = """
+
+body {
+  text-align: center;
+}
+
 h2 {
+    color: deeppink;
+    font-size: 6.25rem;
+}
+
+span {
     color: deeppink;
 }
 
 .css-6qob1r {
     background: #f5cee5 !important;
 }
+
+.css-1v0mbdj {
+  # max-width: 200px;
+}
+
+.main {
+  background-image: url("https://images.unsplash.com/photo-1524435823394-99adce70ee08?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1960&q=80.png");
+}
 """
 
 st.markdown(f'<style>{CSS}</style>', unsafe_allow_html=True)
 
 
-st.header('TFL Bike analysis project')
+st.header('TFL BIKES')
 
-image = Image.open("tfl-logo.png")
+st.subheader('System Analysis')
 
-st.image(image, caption='TFL logo')
+# image = Image.open("tfl-logo.png")
+# bikes = Image.open("bikes.png")
 
-col1, col2, col3 = st.columns(3)
-col1.metric("MOST USED BIKE", "$437.8", "-$1.25")
-col2.metric("LONGEST RIDE KM", "$121.10", "0.46%")
-col3.metric("BIKES IN THE SYSTEM", "$46,583.91", "+4.87%")
+# st.image(bikes)
+# st.image(image)
+
 
 
 

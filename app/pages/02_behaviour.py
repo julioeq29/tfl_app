@@ -21,7 +21,7 @@ px.set_mapbox_access_token(
     'pk.eyJ1Ijoiam1oYmF1ZGluNzUiLCJhIjoiY2xkYWY0aTh4MGYzaTN2bnB6NTVqcXlqeCJ9.k7_gsD6_d6aeh9EhU_0Nvw'
 )
 
-st.header('Behaviour 🚀')
+st.header('User Behaviour 💁‍♀️')
 
 #################################################################################
 ########################## -- Borough data line -- ##############################
@@ -36,10 +36,14 @@ def get_borough_data_line():
 
 borough_line = get_borough_data_line()
 
-b_line = px.line(borough_line,
-                 x="Year",
-                 y="Number_of_Bicycle_Hires",
-                 color='Month')
+b_line = px.line(
+    borough_line,
+    x="Year",
+    y="Number_of_Bicycle_Hires",
+    color='Month',
+)
+
+# b_line.update_traces(marker_line_autocolorscale="Greens")
 
 st.header('Monthly number of bicycle hires')
 st.plotly_chart(b_line)
@@ -63,6 +67,8 @@ bikes_daily = px.line(df_everyday,
                       x="hour_slots",
                       y="count_of_bike_hires",
                       color='week_day')
+
+bikes_daily.update_layout(xaxis=dict(tickmode='linear', tick0=1, dtick=1))
 
 st.header('Daily bike hires pattern')
 st.plotly_chart(bikes_daily)

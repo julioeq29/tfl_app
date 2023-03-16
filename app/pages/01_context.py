@@ -23,6 +23,12 @@ px.set_mapbox_access_token(
 
 st.header('Context 🚲')
 
+
+col1, col2, col3 = st.columns(3)
+col1.metric("MOST USED BIKE", "Id: 15,678", "5900 trips")
+col2.metric("AMOUNT OF RIDES", "52M", "50% of bikes, 80% of trips")
+col3.metric("BIKES IN THE SYSTEM", "30,163", "29k classic / 500 elec")
+
 #################################################################################
 #################### -- Num of bicycle hires per year -- ########################
 #################################################################################
@@ -36,6 +42,8 @@ def get_hires_per_year():
 
 df_hires = get_hires_per_year()
 fig = px.line(df_hires, x="Year", y="Number_of_Bicycle_Hires")
+
+fig = go.Figure(fig, layout_yaxis_range=[0,12_000_000])
 
 st.header('Number of bicycle hires per year')
 st.plotly_chart(fig)

@@ -27,7 +27,7 @@ st.header('Context 🚲')
 col1, col2, col3 = st.columns(3)
 col1.metric("MOST USED BIKE", "Id: 15,678", "5900 trips")
 col2.metric("AMOUNT OF RIDES", "52M", "50% of bikes, 80% of trips")
-col3.metric("BIKES IN THE SYSTEM", "30,163", "29k classic / 500 elec")
+col3.metric("BIKES IN THE SYSTEM", "12k", "500 elec")
 
 #################################################################################
 #################### -- Num of bicycle hires per year -- ########################

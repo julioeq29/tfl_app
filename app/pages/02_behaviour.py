@@ -112,24 +112,11 @@ station_use.update_layout(
     ),
 )
 
-# "carto-darkmatter",
-# "carto-positron",
-# "open-street-map",
-# "stamen-terrain",
-# "stamen-toner",
-# "stamen-watercolor",
-# "white-bg",
-# "basic",
-# "streets",
-# "outdoors",
-"light",
-"dark",
-# "satellite",
-# "satellite-streets"
 
 station_use.update_mapboxes(style="light")
 
 st.header('Most used stations')
+
 st.plotly_chart(station_use)
 
 
@@ -148,12 +135,45 @@ def get_tree_map():
 df_tree_map = get_tree_map()
 
 tree_map = px.treemap(data_frame=df_tree_map,
-                      path=[px.Constant("London"), df_tree_map.index],
+                      path=[px.Constant("London"), df_tree_map['Unnamed: 0']],
                       values="Popular_Trips",
                       color='Popular_Trips',
                       color_continuous_scale=['lightblue', 'pink'])
 
 tree_map.update_traces(root_color="lightgrey")
 
-st.header('Most popular trips')
+st.header('Concentration of Trips per Borough')
+
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("COMBINATIONS", "604k", "88.7% realised")
+col2.metric("MOST POPULAR", "Olympic", "99k")
+col3.metric("2nd MOST POPULAR", "Hyde Park", "500 elec")
+col4.metric("LONGEST", "17.2k", "Stratford-Putney")
+
 st.plotly_chart(tree_map)
+
+
+#################################################################################
+############# -- Concentration of Stations per Borough -- #######################
+#################################################################################
+
+
+@st.cache
+def get_concentration_stations():
+    df = pd.read_csv("data/Final_Stations.csv")
+    return df
+
+
+df_concentration = get_concentration_stations()
+
+concentration = px.treemap(data_frame=df_concentration,
+                 path=[px.Constant("London"), 'borough'],
+                 values="n_stations",
+                 color='n_stations',
+                 color_continuous_scale=['lightblue', 'pink'])
+
+concentration.update_traces(root_color="lightgrey")
+
+st.header('Concentration of Stations per Borough')
+
+st.plotly_chart(concentration)

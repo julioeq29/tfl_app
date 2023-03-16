@@ -120,6 +120,61 @@ st.header('Most used stations')
 st.plotly_chart(station_use)
 
 
+#################################################################################
+######################## -- Tree Map Popular Trips -- ###########################
+#################################################################################
+
+
+@st.cache
+def get_stations_zone():
+    df = pd.read_csv("data/df_stations_zone.csv")
+    return df
+
+
+df_stations_zone = get_stations_zone()
+
+
+def get_trips_zone(n_rows=700):
+    df = pd.read_csv("data/df_trips_zones.csv", nrows=n_rows)
+    return df
+
+
+df_trips_zones = get_trips_zone()
+
+df_trips_zones['lat'] = df_trips_zones.lat.apply(
+    lambda x: x.strip("()").split(", "))
+df_trips_zones['lon'] = df_trips_zones.lon.apply(
+    lambda x: x.strip("()").split(", "))
+
+center = {'lat': 51.509865, 'lon': -0.118092}
+
+zones = px.scatter_mapbox(
+    data_frame=df_stations_zone,
+    lat='avg_lat',
+    lon='avg_lon',
+    center=center,
+    zoom=11,
+    width=1000,
+    height=800,
+    text=df_stations_zone.zone,
+    # size_max=0.1,
+)
+for i in range(len(df_trips_zones)):
+    zones.add_trace(
+        go.Scattermapbox(lon=df_trips_zones['lon'][i],
+                         lat=df_trips_zones['lat'][i],
+                         mode='lines',
+                         line=dict(width=2, color='red'),
+                         opacity=df_trips_zones['trips_scaled'][i],
+                         name=df_trips_zones['name'][i],
+                         hovertext=df_trips_zones['name'][i]))
+
+
+st.header('London connections')
+
+st.write("according to a proper Londoner 🇬🇧")
+
+st.plotly_chart(zones)
 
 #################################################################################
 ######################## -- Tree Map Popular Trips -- ###########################
@@ -129,13 +184,15 @@ st.plotly_chart(station_use)
 @st.cache
 def get_tree_map():
     df = pd.read_csv("data/Concentration_Of_Trips_Per_Borough.csv")
+    df.index = df['boroughs']
     return df
 
 
 df_tree_map = get_tree_map()
+# st.write(df_tree_map)
 
 tree_map = px.treemap(data_frame=df_tree_map,
-                      path=[px.Constant("London"), df_tree_map['boroughs']],
+                      path=[px.Constant("London"), df_tree_map.index],
                       values="Popular_Trips",
                       color='Popular_Trips',
                       color_continuous_scale=['lightblue', 'pink'])
